@@ -74,6 +74,7 @@ link_extension()
 {
     echo -n "Linking extension to Klipper... "
     ln -sf "${SRCDIR}/z_calibration.py" "${KLIPPER_PATH}/klippy/extras/z_calibration.py"
+    ln -sf "${SRCDIR}/kobra_probe.py" "${KLIPPER_PATH}/klippy/extras/kobra_probe.py"
     echo "[OK]"
 }
 
@@ -147,6 +148,18 @@ uinstall()
         echo "You also need to remove the \"[z_calibration]\" section in your Klipper configuration..."
     else
         echo -n "${KLIPPER_PATH}/klippy/extras/z_calibration.py not found. Is it installed? "
+        echo "[FAILED]"
+    fi
+
+    if [ -f "${KLIPPER_PATH}/klippy/extras/kobra_probe.py" ]; then
+        echo -n "Uninstalling z_calibration... "
+        rm -f "${KLIPPER_PATH}/klippy/extras/kobra_probe.py"
+        rm -f "${KLIPPER_PATH}/klippy/extras/kobra_probe.pyc"
+        echo "[OK]"
+        echo "You can now remove the \"[update_manager z_calibration]\" section in your moonraker.conf and delete this directory."
+        echo "You also need to remove the \"[z_calibration]\" section in your Klipper configuration..."
+    else
+        echo -n "${KLIPPER_PATH}/klippy/extras/kobra_probe.py not found. Is it installed? "
         echo "[FAILED]"
     fi
 }
