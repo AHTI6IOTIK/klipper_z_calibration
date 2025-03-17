@@ -73,8 +73,7 @@ check_requirements()
 link_extension()
 {
     echo -n "Linking extension to Klipper... "
-    ln -sf "${SRCDIR}/z_calibration.py" "${KLIPPER_PATH}/klippy/extras/z_calibration.py"
-    ln -sf "${SRCDIR}/kobra_probe.py" "${KLIPPER_PATH}/klippy/extras/kobra_probe.py"
+    ln -sf "${SRCDIR}/z_calibration.py" "${KLIPPER_PATH}/klippy/extras/z_calibration.py" && ln -sf "${SRCDIR}/kobra_probe.py" "${KLIPPER_PATH}/klippy/extras/kobra_probe.py"
     echo "[OK]"
 }
 
@@ -108,7 +107,7 @@ add_updater()
         echo -e "\n[update_manager z_calibration]" >> "$MOONRAKER_CONFIG"
         echo "type: git_repo" >> "$MOONRAKER_CONFIG"
         echo "path: ${SRCDIR}" >> "$MOONRAKER_CONFIG"
-        echo "origin: https://github.com/protoloft/klipper_z_calibration.git" >> "$MOONRAKER_CONFIG"
+        echo "origin: https://github.com/AHTI6IOTIK/klipper_z_calibration.git" >> "$MOONRAKER_CONFIG"
         echo "managed_services: klipper" >> "$MOONRAKER_CONFIG"
         echo -e "\n" >> "$MOONRAKER_CONFIG"
         echo "[OK]"
