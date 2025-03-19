@@ -156,6 +156,15 @@ class ZCalibrationHelper:
                          bed_site)
         state = CalibrationState(self, gcmd)
         state.calibrate_z(switch_offset, nozzle_site, switch_site, bed_site)
+        self.printer.lookup_object('homing').cmd_G28(gcmd)
+        self._move([None, None, 10], 2500)
+        self.printer.lookup_object('save_variables').cmd_SAVE_VARIABLE(
+            {
+                "VARIABLE": "zoffset",
+                "VALUE": "{'z': '%f'}" % self.last_z_offset
+            }
+        )
+
 
     cmd_PROBE_Z_ACCURACY_help = ("Probe Z-Endstop accuracy at"
                                  " Nozzle-Endstop position")
@@ -490,7 +499,7 @@ class CalibrationState:
         gcmd_offset = self.gcode.create_gcode_command(
             "SET_GCODE_OFFSET",
             "SET_GCODE_OFFSET",
-            {'Z_ADJUST': 0.0}
+            {'Z': 0.0}
         )
         self.gcode_move.cmd_SET_GCODE_OFFSET(gcmd_offset)
         # set new gcode z offset
