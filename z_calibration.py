@@ -487,14 +487,18 @@ class CalibrationState:
 
     def _set_new_gcode_offset(self, offset):
         # reset gcode z offset to 0
-        gcmd_offset = self.gcode.create_gcode_command("SET_GCODE_OFFSET",
-                                                      "SET_GCODE_OFFSET",
-                                                      {'Z': 0.0})
+        gcmd_offset = self.gcode.create_gcode_command(
+            "SET_GCODE_OFFSET",
+            "SET_GCODE_OFFSET",
+            {'Z_ADJUST': 0.0}
+        )
         self.gcode_move.cmd_SET_GCODE_OFFSET(gcmd_offset)
         # set new gcode z offset
-        gcmd_offset = self.gcode.create_gcode_command("SET_GCODE_OFFSET",
-                                                      "SET_GCODE_OFFSET",
-                                                      {'Z_ADJUST': offset})
+        gcmd_offset = self.gcode.create_gcode_command(
+            "SET_GCODE_OFFSET",
+            "SET_GCODE_OFFSET",
+            {'Z_ADJUST': offset}
+        )
         self.gcode_move.cmd_SET_GCODE_OFFSET(gcmd_offset)
 
     def calibrate_z(self, switch_offset, nozzle_site, switch_site, bed_site):
