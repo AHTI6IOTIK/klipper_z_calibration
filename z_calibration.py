@@ -156,6 +156,8 @@ class ZCalibrationHelper:
                          bed_site)
         state = CalibrationState(self, gcmd)
         state.calibrate_z(switch_offset, nozzle_site, switch_site, bed_site)
+        self._move([None, None, 10], 30)
+        self._move([0, 0, None], 40)
 
     cmd_PROBE_Z_ACCURACY_help = ("Probe Z-Endstop accuracy at"
                                  " Nozzle-Endstop position")
